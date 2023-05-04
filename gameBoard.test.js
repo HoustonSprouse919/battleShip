@@ -87,3 +87,29 @@ testBoard.placeShip(3,5,"Carrier",5,"right");
     expect(testBoard4.board[34])
     .toEqual({"interact": false, ship: "testPlace4", "x": 5, "y": 4});
   });
+
+  test('hit ship', () => {
+    expect(testBoard4.receiveAttack(5,2))
+    .toEqual(true);
+  });
+  test('miss ship', () => {
+    expect(testBoard4.receiveAttack(7,7))
+    .toEqual(false);
+  });
+  let testBoard5 = gameBoard();
+  testBoard5.placeShip(5,6,"testPlace4",5,"up");
+  testBoard5.receiveAttack(5,2);
+
+  test('hit state change', () => {
+    expect(testBoard5.board[14].interact)
+    .toEqual("hit");
+  });
+  test('hit counter on specific ship change', () => {
+    expect(testBoard5.ships[0].hits)
+    .toEqual(1);
+  });
+  testBoard5.receiveAttack(7,7);
+  test('miss state change', () => {
+    expect(testBoard5.board[66].interact)
+    .toEqual("miss");
+  });

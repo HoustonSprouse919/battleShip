@@ -80,6 +80,23 @@ return{
         }else{
             return false;
         }
+    },
+    receiveAttack(x,y){
+        let position = ((x-1) + ((y-1)*10))
+        let hitStat;
+        if(this.board[position].ship != "none"){
+            this.board[position].interact = "hit";
+            let shipName =  this.board[position].ship;
+            this.ships.find(({name }) => name == shipName).hit()
+            hitStat = true;
+        } else{
+            this.board[position].interact = "miss";
+            hitStat = false
+        }
+        if(this.ships.every(({sunk}) => sunk == true)){
+            //run a function here to end the game
+        }
+        return hitStat
     }
 }
 }
