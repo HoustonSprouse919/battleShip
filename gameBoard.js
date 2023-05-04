@@ -7,6 +7,7 @@ return{
     interact:interactState
 }
 }
+
 function gameBoard(size=10){
     let boardNodes=[];
     for(let i =1;i<=size;i++){
@@ -18,10 +19,67 @@ function gameBoard(size=10){
 return{
     board:boardNodes,
     ships:shipsArray,
+    placeLogic(x,y,ore,length){
+        let legal = null;
+        if(ore == "right"){
+            let endPos =x+length-1;
+            if(endPos >=11){
+               legal = false;
+            } else{
+                legal = true;
+            }
+            } else if(ore=="left"){
+                let endPos =x-length+1;
+            if(endPos<=0){
+               legal = false;
+            } else{
+                legal = true;
+            }
+            }
+            else if(ore=="up"){
+                let endPos =y-length+1;
+            if(endPos<=0){
+                legal = false;
+            }else{
+                legal = true;
+            }
+            } else if(ore == "down"){
+                let endPos =y+length-1;
+                if(endPos >=11){
+                   legal = false;
+             }else{
+                legal = true;
+            }
+    }
+    return legal
+},
+
     placeShip(x,y,name,length,oreintation = "right"){
         let position = ((x-1) + ((y-1)*10))
+        if(this.placeLogic(x,y,oreintation,length)== true){
         this.ships.push(shipFactory(name,length));
         this.board[position].ship = name;
+
+        if(oreintation =="right"){
+        for(let i=0;i<length;i++){
+                this.board[position+i].ship=name;
+            } 
+        }else if(oreintation =="left"){
+            for(let i=0;i<length;i++){
+                this.board[position-i].ship=name;
+            }
+            } else if(oreintation =="down"){
+                for(let i=0;i<length;i++){
+                this.board[position+(i*10)].ship=name;
+                }
+            } else if(oreintation =="up"){
+                for(let i=0;i<length;i++){
+                this.board[position-(i*10)].ship=name;
+                }
+            }
+        }else{
+            return false;
+        }
     }
 }
 }

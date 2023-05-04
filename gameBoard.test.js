@@ -10,8 +10,80 @@ test('creating the board itself 15th spot', () => {
     expect(testBoard.board[15])
     .toEqual({"interact": false, ship: "none", x: 6, y: 2});
   });
-testBoard.placeShip(7,2,"Carrier",5,"right");
-  test('place a ship', () => {
-    expect(testBoard.board[16])
-    .toEqual({"interact": false, ship: "Carrier", "x": 7, "y": 2});
+
+  test('place logic right over side', () => {
+    expect(testBoard.placeLogic(7,5,"right",5))
+    .toEqual(false);
+  });
+
+  test('place logic right', () => {
+    expect(testBoard.placeLogic(4,5,"right",5))
+    .toEqual(true);
+  });
+
+  test('place logic left over', () => {
+    expect(testBoard.placeLogic(3,5,"left",5))
+    .toEqual(false);
+  });
+
+  test('place logic up over', () => {
+    expect(testBoard.placeLogic(3,3,"up",5))
+    .toEqual(false);
+  });
+
+  test('place logic down over', () => {
+    expect(testBoard.placeLogic(3,7,"down",5))
+    .toEqual(false);
+  });
+
+
+testBoard.placeShip(3,5,"Carrier",5,"right");
+  test('place a ship right', () => {
+    expect(testBoard.board[42])
+    .toEqual({"interact": false, ship: "Carrier", "x": 3, "y": 5});
+  });
+
+  test('test to see if ship goes to end point right', () => {
+    expect(testBoard.board[46])
+    .toEqual({"interact": false, ship: "Carrier", "x": 7, "y": 5});
+  });
+
+  let testBoard2 = gameBoard();
+  testBoard2.placeShip(5,1,"testPlace2",5,"left");
+  test('place a ship left', () => {
+    expect(testBoard2.board[4])
+    .toEqual({"interact": false, ship: "testPlace2", "x": 5, "y": 1});
+  });
+
+  test('place a ship left end point', () => {
+    expect(testBoard2.board[0])
+    .toEqual({"interact": false, ship: "testPlace2", "x": 1, "y": 1});
+  });
+  let testBoard3 = gameBoard();
+  testBoard3.placeShip(5,1,"testPlace3",5,"down");
+  test('place a ship down', () => {
+    expect(testBoard3.board[4])
+    .toEqual({"interact": false, ship: "testPlace3", "x": 5, "y": 1});
+  });
+  test('place a ship down end', () => {
+    expect(testBoard3.board[44])
+    .toEqual({"interact": false, ship: "testPlace3", "x": 5, "y": 5});
+  });
+
+
+  let testBoard4 = gameBoard();
+  testBoard4.placeShip(5,6,"testPlace4",5,"up");
+  test('place a ship up', () => {
+    expect(testBoard4.board[54])
+    .toEqual({"interact": false, ship: "testPlace4", "x": 5, "y": 6});
+  });
+
+  test('place a ship up end', () => {
+    expect(testBoard4.board[14])
+    .toEqual({"interact": false, ship: "testPlace4", "x": 5, "y": 2});
+  });
+
+  test('place a ship up middle', () => {
+    expect(testBoard4.board[34])
+    .toEqual({"interact": false, ship: "testPlace4", "x": 5, "y": 4});
   });
