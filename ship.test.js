@@ -1,4 +1,4 @@
-const shipFactory = require('./ship');
+import { shipFactory } from './ship.js';
 
 test('creating a Carrier', () => {
   expect(shipFactory("Carrier",5))

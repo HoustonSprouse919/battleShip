@@ -1,4 +1,4 @@
-function shipFactory(shipName,shipLength,hitsTaken=0,sunkStat =false) {
+export function shipFactory(shipName,shipLength,hitsTaken=0,sunkStat =false) {
         return{
             name:shipName,
             length:shipLength,
@@ -6,6 +6,7 @@ function shipFactory(shipName,shipLength,hitsTaken=0,sunkStat =false) {
             sunk:sunkStat,
             hit(){
                 this.hits++
+                this.isSunk();
                 return this.hits
             },
             isSunk(){
@@ -16,4 +17,3 @@ function shipFactory(shipName,shipLength,hitsTaken=0,sunkStat =false) {
             }
         }
   }
-  module.exports = shipFactory;

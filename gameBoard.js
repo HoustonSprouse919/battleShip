@@ -1,4 +1,6 @@
-const shipFactory = require('./ship');
+
+
+import { shipFactory } from './ship.js';
 function boardNode(xCoord,yCoord,shipPresent = "none",interactState =false) {
 return{
     x:xCoord,
@@ -8,7 +10,7 @@ return{
 }
 }
 
-function gameBoard(size=10){
+export function gameBoard(size=10){
     let boardNodes=[];
     for(let i =1;i<=size;i++){
         for(let j =1;j<=size;j++){
@@ -84,6 +86,9 @@ return{
     receiveAttack(x,y){
         let position = ((x-1) + ((y-1)*10))
         let hitStat;
+        if(this.board[position].interact != false){
+            return false
+        }
         if(this.board[position].ship != "none"){
             this.board[position].interact = "hit";
             let shipName =  this.board[position].ship;
@@ -93,12 +98,15 @@ return{
             this.board[position].interact = "miss";
             hitStat = false
         }
-        if(this.ships.every(({sunk}) => sunk == true)){
-            //run a function here to end the game
-        }
         return hitStat
+    },
+    isAllSunk(){
+        if(this.ships.every(({sunk}) => sunk == true)){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 }
 }
-
-module.exports = gameBoard;

@@ -1,4 +1,4 @@
-const gameBoard = require('./gameBoard');
+import { gameBoard } from './gameBoard.js';
 
 let testBoard = gameBoard();
 
@@ -87,6 +87,10 @@ testBoard.placeShip(3,5,"Carrier",5,"right");
     expect(testBoard4.board[34])
     .toEqual({"interact": false, ship: "testPlace4", "x": 5, "y": 4});
   });
+  test('test if already attacked', () => {
+    expect(testBoard4.receiveAttack(5,4))
+    .toEqual(true);
+  });
 
   test('hit ship', () => {
     expect(testBoard4.receiveAttack(5,2))
@@ -99,6 +103,10 @@ testBoard.placeShip(3,5,"Carrier",5,"right");
   let testBoard5 = gameBoard();
   testBoard5.placeShip(5,6,"testPlace4",5,"up");
   testBoard5.receiveAttack(5,2);
+  testBoard5.receiveAttack(5,3);
+  testBoard5.receiveAttack(5,4);
+  testBoard5.receiveAttack(5,5);
+  testBoard5.receiveAttack(5,6);
 
   test('hit state change', () => {
     expect(testBoard5.board[14].interact)
@@ -106,10 +114,28 @@ testBoard.placeShip(3,5,"Carrier",5,"right");
   });
   test('hit counter on specific ship change', () => {
     expect(testBoard5.ships[0].hits)
-    .toEqual(1);
+    .toEqual(5);
   });
+
+  test('hit state change', () => {
+    expect(testBoard5.board[24].interact)
+    .toEqual("hit");
+  });
+
+
   testBoard5.receiveAttack(7,7);
   test('miss state change', () => {
     expect(testBoard5.board[66].interact)
     .toEqual("miss");
   });
+  test('test if already attacked', () => {
+    expect(testBoard5.receiveAttack(7,7))
+    .toEqual(false);
+  });
+
+  test('sunk all', () => {
+    expect(testBoard5.isAllSunk())
+    .toEqual(true);
+  });
+
+  

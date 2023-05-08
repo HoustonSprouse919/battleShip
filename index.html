@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>battleShip</title>
+    <link rel="stylesheet" href="styles.css">
+
+</head>
+<body>
+    <h1>BattleShip :)</h1>
+    <section class = "mainSection">
+        <div id = "player1Sec"></div>
+        <div id = "player2Sec"></div>
+    </section>
+
+
+
+    <div class ="form" id = "myForm">
+        <form class = "form-container">
+            <h1>Please input players!</h1>
+            <div id = "player1Info">
+            <label for="player1Name"><b>Player1 Name</b></label>
+            <input type="text" placeholder="Please enter name here" name="player1Name" required>
+            <p>Is player1 1st or 2nd?</p>
+            <input type="radio" id="1st" name="player1Marker" value="1st">
+            <label for="html">1st</label><br>
+  
+            <input type="radio" id="2nd" name="player1Marker" value="2nd">
+            <label for="html">2nd</label><br>            
+        </div>
+
+
+        <div id = "player2Info">
+            <label for="player2 Name"><b>Player2 Name</b></label>
+            <input type="text" placeholder="Please enter name here" name="player2Name" required>         
+        </div>
+        <button type="button" class="btn" id = "btnContinue">Continue!</button>
+          <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+        </form>
+      </div>
+</body>
+<script type="module" src="game.js"></script>
+</html>
