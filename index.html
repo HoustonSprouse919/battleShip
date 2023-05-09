@@ -6,23 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>battleShip</title>
     <link rel="stylesheet" href="styles.css">
-
 </head>
 <body>
     <h1>BattleShip :)</h1>
     <section class = "mainSection">
+        <div>
+            <h2 id = "player1Title"> </h2>
         <div id = "player1Sec"></div>
+    </div>
+    <div>
+        <h2 id = "player2Title"> </h2>
         <div id = "player2Sec"></div>
+    </div>
     </section>
+    <button id="open-playerInfo">Edit Players</button>
 
 
 
-    <div class ="form" id = "myForm">
-        <form class = "form-container">
-            <h1>Please input players!</h1>
+    <div class ="form" id = "playerInfoForm">
+        <form class = "form-container" id = "form-container">
+            <h1>Please input players</h1>
             <div id = "player1Info">
             <label for="player1Name"><b>Player1 Name</b></label>
-            <input type="text" placeholder="Please enter name here" name="player1Name" required>
+            <input type="text" placeholder="Please enter name here" id ="player1Name" name="player1Name" required>
             <p>Is player1 1st or 2nd?</p>
             <input type="radio" id="1st" name="player1Marker" value="1st">
             <label for="html">1st</label><br>
@@ -31,13 +37,12 @@
             <label for="html">2nd</label><br>            
         </div>
 
-
         <div id = "player2Info">
             <label for="player2 Name"><b>Player2 Name</b></label>
-            <input type="text" placeholder="Please enter name here" name="player2Name" required>         
+            <input type="text" placeholder="Please enter name here" id="player2Name" name="player2Name" required>         
         </div>
         <button type="button" class="btn" id = "btnContinue">Continue!</button>
-          <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+          <button type="button" id="btn-cancel">Close</button>
         </form>
       </div>
 </body>

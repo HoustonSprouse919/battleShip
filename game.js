@@ -1,12 +1,14 @@
 import { player } from './player.js';
 
 let currentPlayer;
-let player1;
-let player2;
+let player1 = player("player1",1,false);
+let player2 = player("player2",2,false);
 export function gameCreation() {
-    player1 = player("Houston",1,false)
-    player2=player("Jeff",1,false)
+    document.getElementById('player1Title').innerHTML = player1.name;
+    document.getElementById('player2Title').innerHTML = player2.name;
     currentPlayer =1;
+    createDivs(10,"player1Sec",player1)
+    createDivs(10,"player2Sec",player2)
 //ask first player to place their ships
 player1.playerBoard.placeShip(1,1,"Carrier",5,"right");
 player2.playerBoard.placeShip(1,1,"Carrier",5,"right");
@@ -57,6 +59,11 @@ if(player1.playerBoard.isAllSunk()== true){
     //say player 1 has won
 }
 }
+document.getElementById('open-playerInfo').addEventListener("click", function(){ document.getElementById('playerInfoForm').style.display = 'block';})
+document.getElementById('btn-cancel').addEventListener("click", 
+function(){ 
+    document.getElementById('playerInfoForm').style.display = 'none';
+    document.getElementById("form-container").reset();})
 
 function changePlayerInfo(player1Name,turnNum,player2Name){
     player1.name = player1Name;
@@ -67,11 +74,23 @@ function changePlayerInfo(player1Name,turnNum,player2Name){
     } else {
         player2.turn = "1st"
     }
+    gameCreation();
   }
-document.getElementById('btnContinue').addEventListener("click", function(){test()})
-function test(){
-    console.log("Hello")
+document.getElementById('btnContinue').addEventListener("click", 
+function(){
+    getPlayerInfo();
+    document.getElementById('playerInfoForm').style.display = 'none';
+    document.getElementById("form-container").reset()})
+function getPlayerInfo(){
+    let player1Name = document.getElementById("player1Name").value
+    let turnNum;
+   if(document.getElementById("1st").checked){
+    turnNum="1st"
+   } else if(document.getElementById("2nd").checked){
+    turnNum="2nd"
+   }
+   let player2Name = document.getElementById("player2Name").value
+   changePlayerInfo(player1Name,turnNum,player2Name)
 }
+
 gameCreation()
-createDivs(10,"player1Sec",player1)
-createDivs(10,"player2Sec",player2)
